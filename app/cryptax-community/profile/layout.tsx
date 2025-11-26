@@ -12,11 +12,11 @@ const MyProfileLayout = ({ children }: { children: React.ReactNode }) => {
 
     // make profile layout
     return (
-        <div className="w-full flex flex-col justify-start gap-6 ">
+        <div className="w-full flex flex-col justify-start gap-4 sm:gap-6 ">
             {/* profile header */}
-            <div className="p-4 flex flex-col gap-2 bg-white rounded-primary">
-                <p className="text-xl font-bold">Profile</p>
-                <p className="text-base text-[#374151]">You can access all your data and information from anywhere. </p>
+            <div className="sm:p-4 p-3 flex flex-col gap-1 sm:gap-2 bg-white rounded-primary">
+                <p className="sm:text-xl text-lg font-bold">Profile</p>
+                <p className="sm:text-base text-sm text-[#374151]">You can access all your data and information from anywhere. </p>
             </div>
             {/* separator */}
             <hr className="w-full border border-gray-300" />

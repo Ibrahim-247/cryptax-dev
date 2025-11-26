@@ -9,13 +9,13 @@ const ProfileNavs = () => {
         { name: "Settings", path: "/cryptax-community/profile/settings", exact: true },
     ];
     return (
-        <nav className='w-full p-2 flex gap-2 rounded-md bg-white'>
+        <nav className='w-full p-2 flex gap-2 overflow-x-auto rounded-md bg-white'>
             {links.map((link, index) => (
                 <NavLink
                     key={index}
                     href={link.path}
                     exact={link.exact}
-                    className='px-6 py-2 rounded-md text-base text-[#374151]'
+                    className='sm:px-6 px-4 sm:py-2 py-1.5 text-nowrap rounded-md text-sm sm:text-base text-[#374151]'
                     activeClass='!text-white bg-primary'
                 >
                     <span>{link.name}</span>
