@@ -40,20 +40,20 @@ const CreatePostForm = () => {
     return (
         <>
             {/* User Info */}
-            <div className="flex px-6 pt-6 gap-3 justify-start items-center">
+            <div className="flex px-3 md:px-6 pt-4 md:pt-6 gap-3 justify-start items-center">
                 <Image
                     width={56}
                     height={56}
                     src="https://i.pravatar.cc/150?img=1"
                     alt="user"
-                    className="w-14 h-14 object-cover rounded-full"
+                    className="md:size-14 size-12 object-cover rounded-full"
                 />
-                <div className="flex flex-col">
-                    <p className="text-base font-bold">John Doe</p>
+                <div className="flex gap-1 flex-col">
+                    <p className="md:text-base text-sm font-bold">John Doe</p>
                     <Select
                         value={visibility}
                         onChange={setVisibility}
-                        className="mt-1 w-44"
+                        className="border border-primary-border w-34 md:w-44"
                         options={[
                             { value: "public", label: "🌍 Public" },
                             { value: "connections", label: "👥 Only Connections" },
@@ -64,9 +64,10 @@ const CreatePostForm = () => {
             </div>
 
             {/* Rich Text Editor */}
-            <div className="px-6">
+            <div className="px-3 md:px-6">
                 <SimpleMDE
                     onChange={handleChange}
+                    className=""
                     options={{
                         spellChecker: false,
                         placeholder: "What's on your mind?",
@@ -92,7 +93,7 @@ const CreatePostForm = () => {
 
             {/* Image Previews */}
             {images.length > 0 && (
-                <div className="w-full px-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+                <div className="w-full px-3 md:px-6 grid grid-cols-3 md:grid-cols-6 gap-3">
                     {images.map((img, index) => (
                         <div
                             key={index}
@@ -103,7 +104,7 @@ const CreatePostForm = () => {
                                 alt={`preview-${index}`}
                                 width={200}
                                 height={200}
-                                className="object-cover w-full h-20"
+                                className="object-contain w-full h-20"
                             />
                             <button
                                 onClick={() => handleRemoveImage(index)}
@@ -117,7 +118,7 @@ const CreatePostForm = () => {
             )}
 
             {/* Image Upload */}
-            <div className="px-6">
+            <div className="px-3 md:px-6">
                 <label className="cursor-pointer border border-dashed border-gray-400 hover:border-primary/70 transition-colors rounded-lg w-full flex flex-col items-center justify-center py-6">
                     <span className="text-sm text-gray-500">
                         📸 Click or drag to upload images
@@ -133,10 +134,10 @@ const CreatePostForm = () => {
             </div>
 
             {/* Post Button */}
-            <div className="flex py-3 px-6 border-t border-[rgba(166,170,181,0.50)] justify-end">
+            <div className="flex py-3 px-3 md:px-6 border-t border-[rgba(166,170,181,0.50)] justify-end">
                 <button
                     onClick={handlePost}
-                    className="bg-primary cursor-pointer text-white text-base font-semibold px-10 py-3 rounded-full transition-colors hover:bg-primary/90"
+                    className="bg-primary cursor-pointer text-white text-sm sm:text-base font-semibold px-6 sm:px-10 sm:py-3 py-2 rounded-full transition-colors hover:bg-primary/90"
                 >
                     Post
                 </button>

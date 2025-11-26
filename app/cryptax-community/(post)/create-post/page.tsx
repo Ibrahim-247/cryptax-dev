@@ -12,7 +12,7 @@ const CreatePost = () => {
 
     // main render
     return (
-        <div className="w-full overflow-hidden flex flex-col justify-start border gap-6 border-[rgba(166,170,181,0.50)]  rounded-3xl bg-white shadow-sm">
+        <div className="w-full overflow-hidden flex flex-col justify-start border gap-3 md:gap-6 border-[rgba(166,170,181,0.50)]  rounded-xl bg-white shadow-sm">
             <CreatePostForm />
         </div>
     );
