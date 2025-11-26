@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 }
 const Notifications = () => {
     return (
-        <div className='w-full flex justify-between gap-6 items-start'>
+        <div className='w-full flex justify-between gap-4 2xl:gap-6 items-start'>
             {/* Notification list client  */}
             <NotificationList />
             {/* user list and most popular news */}
