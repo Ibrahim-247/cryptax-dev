@@ -51,7 +51,7 @@ const FeedBackModal = () => {
             {/* Floating Feedback Button */}
             <Tooltip placement="left" title="We Like Your Feedback">
                 <button
-                    className="fixed xl:bottom-10 bottom-5  right-5 z-50 cursor-pointer transition-transform hover:scale-110"
+                    className="fixed xl:bottom-4 bottom-  right-4 z-50 cursor-pointer transition-transform hover:scale-110"
                     onClick={() => setIsModalOpen(true)}
                     aria-label="Open feedback modal"
                 >

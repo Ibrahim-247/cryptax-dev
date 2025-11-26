@@ -59,7 +59,7 @@ const MessageList = () => {
     ]
     // main render
     return (
-        <div className="w-full flex flex-col pr-2 gap-8 justify-start h-full overflow-y-auto">
+        <div className="w-full flex flex-col pr-2  gap-4 md:gap-8 justify-start h-full overflow-y-auto">
             {
                 messages?.map((message, i) => <MessageBubble message={message} key={i} />)
             }

@@ -22,7 +22,7 @@ const MessageBubble = ({ message }: MessageBubbleProps) => {
         >
             {/* Avatar (only on left side for advisor) */}
             {isAdvisor && (
-                <div className="size-12 rounded-full overflow-hidden shrink-0">
+                <div className="md:size-12 sm:size-10 size-8 rounded-full overflow-hidden shrink-0">
                     <Image
                         src={message.image_url}
                         alt="avatar"
@@ -35,7 +35,7 @@ const MessageBubble = ({ message }: MessageBubbleProps) => {
 
             {/* Bubble */}
             <div
-                className={` text-black p-3 rounded-sm text-base font-medium  
+                className={` text-black sm:p-3 p-2 rounded-sm text-sm sm:text-base  font-medium  
           ${isAdvisor ? "bg-gray-100" : "bg-primary/70  "}
         `}
             >
@@ -47,7 +47,7 @@ const MessageBubble = ({ message }: MessageBubbleProps) => {
 
             {/* Avatar for user on right side (optional) */}
             {!isAdvisor && (
-                <div className="size-12 rounded-full overflow-hidden shrink-0">
+                <div className="md:size-12 sm:size-10 size-8 rounded-full overflow-hidden shrink-0">
                     <Image
                         src={message.image_url}
                         alt="avatar"
