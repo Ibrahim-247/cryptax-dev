@@ -36,14 +36,14 @@ const InformationForm = () => {
     const onSubmit = (data: InformationFormData) => {
         console.log(data);
     }
-
+    // main form
     return (
         <form className="w-full flex flex-col gap-4 justify-start" onSubmit={handleSubmit(onSubmit)}>
             <div>
-                <p className="text-2xl font-medium">Change Information</p>
+                <p className="md:text-2xl text-xl font-medium">Change Information</p>
                 <div className="w-full h-px bg-primary-border my-2" />
             </div>
-            <div className="w-full grid grid-cols-2 gap-4">
+            <div className="w-full grid md:grid-cols-2 gap-4">
                 <CommonFieldset
                     control={control}
                     register_as="first_name"
@@ -146,7 +146,7 @@ const InformationForm = () => {
                     errors={errors}
                 />
             </div>
-            <CommonButton type="submit" className="bg-primary max-w-fit self-end">
+            <CommonButton type="submit" className="bg-primary max-w-fit min-h-auto! p-3 self-end">
                 Save Changes
             </CommonButton>
         </form>

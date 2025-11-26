@@ -26,7 +26,7 @@ const ChangePasswordForm = () => {
     return (
         <form className="w-full flex flex-col gap-4 justify-start" onSubmit={handleSubmit(onSubmit)}>
             <div>
-                <p className="text-2xl font-medium">Change Password</p>
+                <p className="md:text-2xl text-xl font-medium">Change Password</p>
                 <div className="w-full h-px bg-primary-border my-2" />
             </div>
             <div className="w-full grid grid-cols-1 gap-4">
@@ -64,7 +64,7 @@ const ChangePasswordForm = () => {
                     }}
                 />
             </div>
-            <CommonButton type="submit" className="bg-primary max-w-fit self-end">
+            <CommonButton type="submit" className="bg-primary max-w-fit min-h-auto! p-3 self-end">
                 Save Changes
             </CommonButton>
         </form>

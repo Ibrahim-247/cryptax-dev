@@ -9,13 +9,13 @@ export const metadata: Metadata = {
 }
 const Settings = () => {
     return (
-        <div className="w-full flex flex-col justify-start gap-8">
+        <div className="w-full flex flex-col justify-start gap-4 sm:gap-8">
             {/* change information  */}
-            <div className="w-full bg-white border border-primary-border rounded-md p-6">
+            <div className="w-full bg-white border border-primary-border rounded-md p-4 md:p-6">
                 <InformationForm />
             </div>
             {/* change password  */}
-            <div className="w-full bg-white border border-primary-border rounded-md p-6">
+            <div className="w-full bg-white border border-primary-border rounded-md p-4 md:p-6">
                 <ChangePasswordForm />
             </div>
         </div>
