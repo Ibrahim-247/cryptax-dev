@@ -34,7 +34,7 @@ const SignIn = () => {
                 </CommonButton>
                 <p className="lg:text-xl text-base font-semibold">
                     Don&lsquo;t have an account?
-                    <Link href="/signup" className="text-[#2FA75F]">Sign Up</Link>.
+                    <Link href="/signup" className="text-[#2FA75F] ml-1">Sign Up</Link>.
                 </p>
             </div>
         </div>

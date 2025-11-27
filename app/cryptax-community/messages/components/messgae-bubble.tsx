@@ -16,7 +16,7 @@ const MessageBubble = ({ message }: { message: MessageBubbleProps }) => {
         <div className={`flex w-full items-start gap-3 ${isOther ? "justify-start" : "justify-end"}`}>
             {/* Avatar (only on left side for other users) */}
             {isOther && (
-                <div className="size-9 border border-primary  rounded-full overflow-hidden shrink-0">
+                <div className="2xl:size-12 sm:size-10 size-8 border border-primary  rounded-full overflow-hidden shrink-0">
                     <Image
                         src={message.image || ""}
                         alt="avatar"
@@ -37,7 +37,7 @@ const MessageBubble = ({ message }: { message: MessageBubbleProps }) => {
 
             {/* Avatar for user on right side (optional) */}
             {!isOther && (
-                <div className="size-9 border border-primary rounded-full overflow-hidden shrink-0">
+                <div className="2xl:size-12  sm:size-10 size-8 border border-primary rounded-full overflow-hidden shrink-0">
                     <Image
                         src={message.image || ""}
                         alt="avatar"

@@ -5,7 +5,13 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-const ConversationBubble = ({ conversation }: { conversation: MessageConversation }) => {
+interface Props {
+    conversation: MessageConversation
+    onClick: () => void
+}
+
+
+const ConversationBubble = ({ conversation, onClick }: Props) => {
 
     const pathname = usePathname()
     const isActive = pathname === `/cryptax-community/messages/${conversation.id}`
@@ -15,6 +21,7 @@ const ConversationBubble = ({ conversation }: { conversation: MessageConversatio
             href={`/cryptax-community/messages/${conversation.id}`}
             className={`w-full flex justify-start items-center gap-3 border-b border-primary-border py-2 px-3 transition
                 ${isActive ? "bg-primary/10" : ""}`}
+            onClick={onClick}
         >
             <div className={`size-10 border-2 shrink-0 rounded-full overflow-hidden 
                 ${isActive ? "border-primary" : "border-primary-border"}`}>

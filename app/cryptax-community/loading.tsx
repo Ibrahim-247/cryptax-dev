@@ -12,7 +12,7 @@ export default function Loading() {
             </div>
             {/* Text content */}
             <div className="flex flex-col items-center gap-1">
-                <h2 className="text-2xl font-semibold text-foreground text-center">Loading your data</h2>
+                <h2 className="sm:text-2xl text-lg font-semibold text-foreground text-center">Loading your data</h2>
                 <p className="text-muted-foreground text-sm max-w-xs text-center leading-relaxed">
                     We&lsquo;re preparing everything for you. This will only take a moment.
                 </p>

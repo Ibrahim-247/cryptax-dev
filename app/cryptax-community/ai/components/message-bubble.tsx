@@ -1,6 +1,6 @@
 'use client';
 import Image from "next/image";
-
+import ai_icon from "@/public/images/ai_icon.png";
 interface MessageBubbleProps {
     message: {
         id: number;
@@ -20,13 +20,13 @@ const MessageBubble = ({ message }: MessageBubbleProps) => {
         <div className={`flex w-full items-start gap-3 ${isAI ? "justify-start" : "justify-end"}`}>
             {/* Avatar (only on left side for advisor) */}
             {isAI && (
-                <div className="md:size-12 sm:size-10 size-8 rounded-full overflow-hidden shrink-0">
+                <div className="md:size-12 p-2 sm:p-3 sm:size-10 size-8 rounded-full border bg-black overflow-hidden shrink-0">
                     <Image
-                        src={message.image_url || ""}
+                        src={ai_icon.src || ""}
                         alt="avatar"
                         width={40}
                         height={40}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                     />
                 </div>
             )}
