@@ -2,9 +2,10 @@ import { Metadata } from "next"
 import RightSideBar from "@/components/shared/right-aside"
 
 export const metadata: Metadata = {
-    title: 'User Profile || Cryptax Community',
-    description: 'Join the Cryptax Community to connect, share, and learn with fellow crypto enthusiasts. Stay updated with the latest news, discussions, and insights in the world of cryptocurrency taxation.',
-}
+    title: "CRYPTAX – Dutch Crypto & Tax Knowledge Hub",
+    description:
+        "Discover the central Dutch platform for crypto and taxation. Access AI search, community insights, news, podcasts, and tools. Join us now!",
+};
 const UserLayout = ({ children }: { children: React.ReactNode }) => {
 
     // make profile layout

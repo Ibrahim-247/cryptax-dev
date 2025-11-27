@@ -5,6 +5,14 @@ import { FaPlus } from "react-icons/fa6"
 import UserPostList from "../components/user-post-list"
 import { PostsResponse } from "@/types"
 import { BsSendPlus } from "react-icons/bs";
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "CRYPTAX – Dutch Crypto & Tax Knowledge Hub",
+    description:
+        "Discover the central Dutch platform for crypto and taxation. Access AI search, community insights, news, podcasts, and tools. Join us now!",
+};
+
 
 const perPage = 10;
 

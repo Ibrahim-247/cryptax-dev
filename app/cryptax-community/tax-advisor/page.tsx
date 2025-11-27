@@ -1,7 +1,5 @@
 
-import { FaArrowRight } from 'react-icons/fa6'
 import MessageList from './components/message-list'
-import Image from 'next/image'
 import { Metadata } from "next";
 import MessageHeader from './components/message-header';
 import SendMessage from './components/send-message';
