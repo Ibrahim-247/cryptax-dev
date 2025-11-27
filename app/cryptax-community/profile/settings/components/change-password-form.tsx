@@ -24,7 +24,7 @@ const ChangePasswordForm = () => {
         console.log(data);
     }
 
-    // main form
+    // main formdadad
     return (
         <form className="w-full flex flex-col gap-4 justify-start" onSubmit={handleSubmit(onSubmit)}>
             <div>
