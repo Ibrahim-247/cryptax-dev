@@ -4,7 +4,7 @@ import CommonButton from "@/components/common/common-button"
 import { FaPlus } from "react-icons/fa6"
 import UserPostList from "../components/user-post-list"
 import { PostsResponse } from "@/types"
-
+import { BsSendPlus } from "react-icons/bs";
 
 const perPage = 10;
 
@@ -41,21 +41,24 @@ const UserDetails = async () => {
     return (
         <div className='w-full flex flex-col justify-start'>
             {/* profile banner and image */}
-            <div className="w-full h-56 rounded-primary relative ">
-                <Image width={400} height={200} src={banner.src} alt="banner" className="w-full rounded-primary h-full hover:grayscale-20   ease-in-out transition-all object-cover" />
-                <div className="size-32 absolute -bottom-10 left-6 shrink-0 rounded-full border-4 border-white">
+            <div className="w-full md:h-56 h-36 sm:h-44 rounded-primary relative ">
+                <Image width={400} height={200} src={banner.src} alt="banner" className="w-full rounded-primary h-full hover:grayscale-20 ease-in-out transition-all object-cover" />
+                <div className="md:size-32 size-24 xs:size-28 absolute -bottom-7 md:-bottom-10 left-6 shrink-0 rounded-full border-4 border-white">
                     <Image width={80} height={80} src={'https://i.pravatar.cc'} alt="user" className="w-full rounded-full h-full object-cover" />
                 </div>
             </div>
             {/* profile details */}
-            <div className="w-full mt-14 flex justify-between flex-col items-center gap-3">
+            <div className="w-full mt-10 md:mt-14 flex justify-between flex-col items-center gap-3">
                 {/* user details */}
                 <div className="w-full flex justify-between items-center gap-3">
                     <div className="flex flex-col gap-0.5">
-                        <p className="text-2xl font-semibold capitalize">John Doe</p>
-                        <p className="text-lg text-gray-500">Software Development Manager</p>
+                        <p className="sm:text-2xl text-lg font-semibold capitalize">John Doe</p>
+                        <p className="sm:text-lg text-sm line-clamp-1  xs:text-base text-gray-500">Software Development Manager</p>
                     </div>
-                    <CommonButton className="max-w-fit min-h-auto! py-2 text-base bg-primary cursor-pointer">Message</CommonButton>
+                    <CommonButton className="w-fit flex justify-center items-center gap-2 min-h-auto! py-2 text-base bg-primary cursor-pointer">
+                        <BsSendPlus />
+                        <span className="sm:text-base text-sm">Message</span>
+                    </CommonButton>
                 </div>
                 {/* followers counts */}
                 <div className="w-full flex gap-6 justify-start items-center">
@@ -70,18 +73,18 @@ const UserDetails = async () => {
                     </div>
                     <button type="button" className="flex gap-2 bg-primary py-2 px-4 rounded-full text-white items-center justify-center cursor-pointer">
                         <FaPlus />
-                        <span>Follow</span>
+                        <span className="sm:text-base text-sm">Follow</span>
                     </button>
                 </div>
             </div>
             {/* About */}
-            <div className="w-full mt-10 p-4 border border-primary-border rounded-md flex flex-col gap-1">
+            <div className="w-full mt-4 md:mt-10 p-3 md:p-4 border border-primary-border rounded-md flex flex-col gap-1">
                 <p className="text-base font-bold capitalize">About</p>
-                <p className="text-[#4F4F4F] text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, natus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, natus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, natus.</p>
+                <p className="text-[#4F4F4F] text-sm sm:text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, natus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, natus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, natus.</p>
             </div>
             {/* user posts list */}
-            <div className="w-full flex flex-col gap-4 mt-6">
-                <p className="text-xl font-bold capitalize">Posts</p>
+            <div className="w-full flex flex-col gap-4 mt-4 md:mt-6">
+                <p className="sm:text-xl text-lg font-bold capitalize">Posts</p>
                 <UserPostList posts={posts} pagination={pagination} />
             </div>
         </div>

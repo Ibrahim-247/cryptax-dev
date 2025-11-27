@@ -14,14 +14,21 @@ const RootLayoutClient = ({ children }: { children: React.ReactNode }) => {
         return () => clearTimeout(timer);
     }, []);
 
-    // Detect mobile device
+    // Detect mobile device (React-safe, async to avoid warnings)
     useEffect(() => {
-        const userAgent = typeof window !== "undefined" ? navigator.userAgent.toLowerCase() : "";
-        const mobileRegex = /iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i;
+        const t = setTimeout(() => {
+            if (typeof window !== "undefined") {
+                const userAgent = navigator.userAgent.toLowerCase();
+                const mobileRegex =
+                    /iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i;
 
-        if (mobileRegex.test(userAgent)) {
-            setIsMobile(true);
-        }
+                if (mobileRegex.test(userAgent)) {
+                    setIsMobile(true);
+                }
+            }
+        }, 0);
+
+        return () => clearTimeout(t);
     }, []);
 
     if (loading) {
@@ -39,7 +46,10 @@ const RootLayoutClient = ({ children }: { children: React.ReactNode }) => {
                 width={350}
                 style={{ textAlign: "center" }}
             >
-                <h2 className="text-xl font-semibold mb-2">Use our app for a better experience</h2>
+                <h2 className="text-xl font-semibold mb-2">
+                    Use our app for a better experience
+                </h2>
+
                 <p className="text-gray-600 mb-4">
                     Get faster performance and an optimized mobile flow on our official app.
                 </p>
@@ -49,23 +59,23 @@ const RootLayoutClient = ({ children }: { children: React.ReactNode }) => {
                     <a
                         href="YOUR_PLAYSTORE_LINK"
                         target="_blank"
-                        className="flex items-center justify-center gap-2 px-4 py-2 bg-black text-white rounded-lg"
+                        className="flex items-center justify-center gap-2 px-4  py-3 bg-black! text-white! rounded-lg"
                     >
-                        <FaGooglePlay size={20} /> Get it on Play Store
+                        <FaGooglePlay size={20} className="text-yellow-400" /> Get it on Play Store
                     </a>
 
                     {/* App Store Button */}
                     <a
                         href="YOUR_APPSTORE_LINK"
                         target="_blank"
-                        className="flex items-center justify-center gap-2 px-4 py-2 bg-black text-white rounded-lg"
+                        className="flex items-center w-full border justify-center gap-2 px-4 py-3 bg-black! text-white! rounded-lg"
                     >
-                        <FaAppStoreIos size={20} /> Download on App Store
+                        <FaAppStoreIos className="text-blue-300" size={20} /> Download on App Store
                     </a>
                 </div>
 
                 <button
-                    className="mt-5 text-blue-600 underline"
+                    className="mt-5 text-lg cursor-pointer text-primary! font-bold underline"
                     onClick={() => setIsMobile(false)}
                 >
                     Continue to website
