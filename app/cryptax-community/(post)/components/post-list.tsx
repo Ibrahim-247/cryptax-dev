@@ -11,7 +11,7 @@ const PostList = ({ posts, pagination }: PostListProps) => {
     console.log(posts);
     // main render
     return (
-        <div className="w-full flex flex-col gap-6">
+        <div className="w-full flex flex-col gap-4 md:gap-6">
             {
                 posts?.map((post, i) => <PostCard post={post} key={i} />)
             }

@@ -41,7 +41,7 @@ const Posts = async () => {
   }
   // extract data
   const { posts, pagination } = data?.data || {};
-
+  //  await fakeDelay(100000);
   // main render
   return (
     <div className="w-full flex flex-col gap-4 sm:gap-6">

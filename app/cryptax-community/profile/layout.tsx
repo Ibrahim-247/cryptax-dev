@@ -2,14 +2,15 @@ import { Metadata } from "next"
 import React from "react"
 import ProfileBanner from "./components/profile-banner"
 import ProfileNavs from "./components/profile-navs"
+import fakeDelay from "@/utils/fakeDelay"
 
 export const metadata: Metadata = {
     title: 'Profile – Your CRYPTAX Account & Activity | CRYPTAX',
     description: 'View your CRYPTAX profile, activity, and community presence. Manage posts, followers, and your crypto & tax engagement in one place.',
 }
 
-const MyProfileLayout = ({ children }: { children: React.ReactNode }) => {
-
+const MyProfileLayout = async ({ children }: { children: React.ReactNode }) => {
+    await fakeDelay(100);
     // make profile layout
     return (
         <div className="w-full flex flex-col justify-start gap-4 sm:gap-6 ">

@@ -10,7 +10,6 @@ const baseURL: string =
 export function axiosPublic(): AxiosInstance {
     const instance: AxiosInstance = axios.create({
         baseURL: `${baseURL}/api`,
-        timeout: 30000,
         headers: {
             "Content-Type": "application/json",
         },
