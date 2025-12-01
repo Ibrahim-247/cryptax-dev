@@ -23,6 +23,7 @@ const GlobalSearchClient = ({ query }: Props) => {
     ];
 
     // Fake results
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const results = [
         {
             id: 1,
@@ -44,7 +45,7 @@ const GlobalSearchClient = ({ query }: Props) => {
             post: {
                 id: 1,
                 tags: ["tag1", "tag2"],
-                body: "",
+                body: "He was an expert but not in a discipline.He was an expert but not in a disciplineHe was an expert but not in a disciplineHe was an expert but not in a discipline.He was an expert but not in a discipline",
                 media: [
                     { id: 1764567522892, link: "https://assets.mixkit.co/videos/preview/mixkit-6-large.mp4", type: "video" },
                     { id: 1764567323522892, link: "https://assets.mixkit.co/videos/preview/mixkit-6-large.mp4", type: "video" },
