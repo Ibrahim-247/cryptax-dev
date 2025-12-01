@@ -18,7 +18,7 @@ export interface Post {
   body: string;
   tags: string[];
   views: number;
-  reactions: { likes: number }; // you can extend this later if needed
+  reactions: { likes: number, dislikes: number }; // you can extend this later if needed
   userId: number;
   media?: Array<{
     id: number;
@@ -39,7 +39,7 @@ export interface News {
   description: string;
   publishedAt: string;
   source: {
-    id: string;
+    id: string | null;
     name: string;
   };
   title: string;

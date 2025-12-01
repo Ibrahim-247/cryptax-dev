@@ -18,12 +18,10 @@ import Image from "next/image";
 import Link from "next/link";
 import MobileNav from "./mobile-nav";
 import LogoutModal from "./logout-modal";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
     const router = useRouter();
-    const pathname = usePathname();
-
     const links = [
         { name: "Home", path: "/cryptax-community", icon: <HomeIcon />, exact: true },
         { name: "AI Search", path: "/cryptax-community/ai", icon: <AiIcon />, exact: true },
@@ -34,18 +32,24 @@ const Header = () => {
         { name: "Messages", path: "/cryptax-community/messages", icon: <MessagesIcon />, exact: false },
         { name: "Notifications", path: "/cryptax-community/notifications", icon: <NotificationsIcon />, exact: true },
     ];
-
     // Search state
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [isSideOpen, setIsSideOpen] = useState<boolean>(false);
     const [isOpenLogout, setIsOpenLogout] = useState<boolean>(false);
 
-    // Handle search on Enter key
-    const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter" && searchQuery.trim()) {
+    const runSearch = () => {
+        if (searchQuery.trim()) {
             const query = encodeURIComponent(searchQuery.trim());
             router.push(`/cryptax-community/global-search?q=${query}`);
-            setSearchQuery(""); // Optional: clear input after search
+        } else {
+            router.push(`/cryptax-community/global-search`);
+        }
+        setSearchQuery("");
+    };
+    // Handle search on Enter key
+    const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            runSearch();
         }
     };
 
@@ -55,10 +59,8 @@ const Header = () => {
                 {/* Left: Logo + Search */}
                 <div className="flex items-center gap-4 2xl:gap-7">
                     <Logo />
-
                     {/* Search form - Desktop */}
                     <div className="xl:flex hidden items-center gap-2 w-72 xl:w-60 2xl:w-72 px-3 py-2.5 border border-black/60 bg-[rgba(243,244,246,0.70)] rounded-full focus-within:ring-2 focus-within:ring-primary/40 transition">
-                        <CiSearch size={22} className="text-gray-600" />
                         <input
                             type="text"
                             placeholder="Search posts, people, or topics..."
@@ -67,6 +69,7 @@ const Header = () => {
                             onChange={(e) => setSearchQuery(e.target.value)}
                             onKeyDown={handleSearch}
                         />
+                        <CiSearch onClick={runSearch} size={22} className="text-gray-600 cursor-pointer" />
                     </div>
                 </div>
 

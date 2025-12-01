@@ -1,8 +1,8 @@
-import CommonLoader from '../components/common-loader'
+import SearchLoader from './components/loader'
 
 const GlobalSearchLoading = () => {
     return (
-        <CommonLoader />
+        <SearchLoader />
     )
 }
 

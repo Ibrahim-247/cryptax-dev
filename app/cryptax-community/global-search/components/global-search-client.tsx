@@ -1,168 +1,175 @@
 "use client";
+import { useState, useMemo } from "react";
+import MostPopularNewsCard from "../../news/components/most-popular-news-card";
+import PostCard from "../../components/post/post";
+import { Post, News } from "@/types";
+import Image from "next/image";
+import { FaPlus } from "react-icons/fa";
 
-import { HeartOutlined, MessageOutlined, UserOutlined, PlayCircleOutlined, SoundOutlined, } from "@ant-design/icons";
-import { Avatar, Card, Input, Typography, Tag, Divider, Space, Button, Empty } from "antd";
-import { CiSearch } from "react-icons/ci";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-const { Title, Text, Paragraph } = Typography;
+interface Props {
+    query: string;
+}
 
-export default function GlobalSearchPage() {
-    const searchParams = useSearchParams();
-    const router = useRouter();
+const GlobalSearchClient = ({ query }: Props) => {
+    const [filter, setFilter] = useState<null | string>(null);
+    const [search, setSearch] = useState<string>(query ?? "");
 
-    const query = searchParams.get("q")?.trim() || "";
-    const [searchInput, setSearchInput] = useState(query);
+    // Filter options
+    const filterOptions = [
+        { label: "All", value: null },
+        { label: "News", value: "article" },
+        { label: "People", value: "people" },
+        { label: "Posts", value: "post" },
+    ];
 
-    useEffect(() => {
-        setSearchInput(query);
-    }, [query]);
-
-    const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter" && searchInput.trim()) {
-            router.push(`/cryptax-community/global-search?q=${encodeURIComponent(searchInput.trim())}`);
-        }
-    };
-
-    // Fake results (only appears when there's a query)
-    const results = query ? [
-        // People
-        { type: "person", name: "Sarah Chen", title: "Crypto Tax Advisor @ TaxBit", avatar: "https://i.pravatar.cc/150?img=68", connections: "12 mutual" },
-        { type: "person", name: "Michael Roberts, CPA", title: "Founder @ CryptoTaxPro", avatar: "https://i.pravatar.cc/150?img=12", connections: "48 mutual" },
-
-        // Posts
+    // Fake results
+    const results = [
         {
-            type: "post", author: "Alex Rivera", authorAvatar: "https://i.pravatar.cc/150?img=5", time: "2h ago", content: "Jufiled taxes for a client with 400 + DeFi swaps.Cost basis tracking was a nightmare until we used proper software.Start tracking Jan 1st!", likes: 89, comments: 23
+            id: 1,
+            type: "article",
+            news: {
+                source: { id: null, name: "NBCSports.com" },
+                author: "Mike Florio",
+                title: "Report: Lane Kiffin wants to finish year at Ole Miss before leaving for LSU - NBC Sports",
+                description: "The Lane Kiffin delay seems to trace to a desire to leave for LSU after finishing the season at Mississippi.",
+                url: "https://www.nbcsports.com/.../",
+                urlToImage: "https://nbcsports.brightspotcdn.com/.../",
+                publishedAt: "2025-11-30T03:57:26Z",
+                content: "The Lane Kiffin delay seems to trace to a desire ..."
+            }
         },
-        { type: "post", author: "Emma Thompson", authorAvatar: "https://i.pravatar.cc/150?img=33", time: "5h ago", content: "IRS confirmed: Spot Bitcoin ETFs are NOT subject to wash-sale rules. Huge win for holders!", likes: 342, comments: 67 },
+        {
+            id: 2,
+            type: "post",
+            post: {
+                id: 1,
+                tags: ["tag1", "tag2"],
+                body: "",
+                media: [
+                    { id: 1764567522892, link: "https://assets.mixkit.co/videos/preview/mixkit-6-large.mp4", type: "video" },
+                    { id: 1764567323522892, link: "https://assets.mixkit.co/videos/preview/mixkit-6-large.mp4", type: "video" },
+                    { id: 1764567323522893, link: "https://assets.mixkit.co/videos/preview/mixkit-6-large.mp4", type: "video" }
+                ],
+                reactions: { likes: 859, dislikes: 32 },
+                title: "He was an expert but not in a discipline",
+                userId: 91,
+                views: 4884
+            }
+        },
+        {
+            id: 3,
+            type: "people",
+            person: {
+                id: 1,
+                name: "John Doe",
+                username: "@johndoe",
+                profession: "Works at Rotaract Club of Entertainment",
+                image: "https://i.pravatar.cc/150?img=1",
+                isFollowing: true
+            }
+        }
+    ];
 
-        // Article
-        { type: "article", title: "2025 Crypto Tax Guide: Bitcoin, DeFi, NFTs & Staking", author: "CryptoTax Team", date: "Nov 20, 2025", readTime: "8 min read", thumbnail: "https://images.unsplash.com/photo-1621504450181-5d356f61d307?w=800&q=80" },
+    // === Filtering logic ===
+    const filteredResults = useMemo(() => {
+        return results.filter((item) => {
+            if (filter && item?.type !== filter) return false;
 
-        // Podcast
-        { type: "podcast", title: "Bitcoin ETF Tax Rules with Former IRS Agent", host: "The Crypto Tax Podcast", duration: "46 min", plays: "12.4K", date: "3 days ago" },
-    ] : [];
+            if (!search) return true;
+
+            // Search across all types
+            if (item.type === "article") {
+                return item?.news?.title.toLowerCase().includes(search.toLowerCase());
+            }
+            if (item.type === "post") {
+                return item?.post?.title.toLowerCase().includes(search.toLowerCase());
+            }
+            if (item.type === "people") {
+                return item?.person?.name.toLowerCase().includes(search.toLowerCase());
+            }
+
+            return true;
+        });
+    }, [filter, results, search]);
 
     return (
-        <div className="w-full bg-gray-50">
-            {/* Sticky Search Bar */}
-            <div className="w-full bg-white border-b shadow-sm">
-                <div className="max-w-6xl mx-auto px-4 py-6">
-                    <Input
-                        size="large"
-                        placeholder={`Search "${query || "bitcoin tax"}"...`}
-                        prefix={<CiSearch className="text-gray-500" size={24} />}
-                        value={searchInput}
-                        onChange={(e) => setSearchInput(e.target.value)}
-                        onKeyDown={handleSearch}
-                        allowClear
-                        className="max-w-2xl mx-auto text-lg rounded-full"
-                        autoFocus
-                    />
-                    {query && (
-                        <Text type="secondary" className="block text-center mt-3">
-                            About <strong>1,284</strong> results for <Text strong className="text-blue-600">"{query}"</Text>
-                        </Text>
-                    )}
-                </div>
+        <div className="w-full flex flex-col gap-4 sm:gap-6">
+
+            {/* Search title */}
+            {search && (
+                <p className="text-base font-semibold">
+                    Search results for: <span className="text-primary">{search}</span>
+                </p>
+            )}
+
+            {/* Search bar */}
+            <input
+                type="text"
+                className="w-full outline-none p-3 border border-primary-border rounded text-base font-medium placeholder:text-gray-500"
+                placeholder="Type your message"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
+
+            {/* Filter options */}
+            <div className="flex justify-start items-center gap-4 flex-wrap">
+                {filterOptions.map((item, i) => (
+                    <button
+                        key={i}
+                        type="button"
+                        onClick={() => setFilter(item.value)}
+                        className={`text-sm font-semibold cursor-pointer border rounded-full px-3 md:px-6 py-1.5 ${item.value === filter
+                            ? "border-primary text-primary"
+                            : "text-[#4F4F4F] border-[#808080]"
+                            }`}
+                    >
+                        {item.label}
+                    </button>
+                ))}
             </div>
-            {/* Main Content */}
-            <div className="w-full">
-                {!query ? (
-                    <Empty
-                        image={<CiSearch size={80} className="mx-auto text-gray-300" />}
-                        description={
-                            <div className="text-center">
-                                <Title level={4} type="secondary">Start searching the community</Title>
-                                <Text type="secondary">Try: bitcoin tax, staking rewards, NFT deductions, IRS rules</Text>
+
+            {/* Results */}
+            <div className="w-full flex flex-col gap-4">
+                {filteredResults.map((item, i) => {
+                    if (item.type === "article") {
+                        return <MostPopularNewsCard article={item.news as News} index={i} key={i} />;
+                    }
+                    if (item.type === "post") {
+                        return <PostCard post={item.post as Post} key={i} />;
+                    }
+                    if (item.type === "people") {
+                        return (
+                            <div className="w-full flex justify-between items-start bg-white rounded-primary p-4" key={i}>
+                                <div className="flex items-start gap-2">
+                                    <div className="size-10 rounded-full overflow-hidden">
+                                        <Image
+                                            width={40}
+                                            height={40}
+                                            src={item?.person?.image || ""}
+                                            alt={item?.person?.name || ""}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <p className="text-sm font-semibold">{item?.person?.name}</p>
+                                        <p className="text-xs text-black/80">{item?.person?.profession}</p>
+                                    </div>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    className="border border-primary cursor-pointer px-3 py-1 rounded-full flex items-center gap-2 text-primary"
+                                >
+                                    <FaPlus />
+                                    <span>Follow</span>
+                                </button>
                             </div>
-                        }
-                    />
-                ) : (
-                    <>
-                        {/* People */}
-                        <div>
-                            <Title level={4} className="mb-4 flex items-center gap-2">
-                                <UserOutlined className="text-blue-600" /> People
-                            </Title>
-                            <Space direction="vertical" size={16} className="w-full">
-                                {results.filter(r => r.type === "person").map((p) => (
-                                    <Card hoverable key={p.name}>
-                                        <div className="flex items-center justify-between">
-                                            <Space>
-                                                <Avatar size={64} src={p.avatar} icon={<UserOutlined />} />
-                                                <div>
-                                                    <Title level={5} className="!mb-1">{p.name}</Title>
-                                                    <Text type="secondary">{p.title}</Text>
-                                                    <br />
-                                                    <Text type="secondary" className="text-sm">{p.connections} connections</Text>
-                                                </div>
-                                            </Space>
-                                            <Button type="default">Connect</Button>
-                                        </div>
-                                    </Card>
-                                ))}
-                            </Space>
-                        </div>
-
-                        <Divider />
-
-                        {/* Posts & Articles */}
-                        {results.filter(r => r.type === "post" || r.type === "article").map((item) => (
-                            <Card hoverable key={item.title || item.content}>
-                                {item.type === "article" && item.thumbnail && (
-                                    <img src={item.thumbnail} alt={item.title} className="w-full h-64 object-cover rounded-t-lg" />
-                                )}
-                                <div className="p-2">
-                                    {item.type === "post" ? (
-                                        <>
-                                            <Space className="mb-4">
-                                                <Avatar src={item.authorAvatar} size="large" />
-                                                <div>
-                                                    <Text strong>{item.author}</Text><br />
-                                                    <Text type="secondary" className="text-xs">{item.time}</Text>
-                                                </div>
-                                            </Space>
-                                            <Paragraph className="text-base mt-3">{item.content}</Paragraph>
-                                            <Space size="large" className="mt-6 text-gray-600">
-                                                <span className="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
-                                                    <HeartOutlined /> {item.likes}
-                                                </span>
-                                                <span className="flex items-center gap-1 hover:text-blue-600 cursor-pointer">
-                                                    <MessageOutlined /> {item.comments}
-                                                </span>
-                                            </Space>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Tag color="purple" className="mb-3">Guide</Tag>
-                                            <Title level={4}>{item.title}</Title>
-                                            <Text type="secondary">{item.author} · {item.readTime} · {item.date}</Text>
-                                        </>
-                                    )}
-                                </div>
-                            </Card>
-                        ))}
-
-                        {/* Podcast */}
-                        {results.filter(r => r.type === "podcast").map((pod) => (
-                            <Card hoverable key={pod.title}>
-                                <div className="flex gap-6">
-                                    <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white">
-                                        <PlayCircleOutlined style={{ fontSize: 48 }} />
-                                    </div>
-                                    <div className="flex-1">
-                                        <Tag icon={<SoundOutlined />} color="magenta" className="mb-2">Podcast</Tag>
-                                        <Title level={4} className="!mt-0 !mb-2">{pod.title}</Title>
-                                        <Text type="secondary">{pod.host}</Text><br />
-                                        <Text type="secondary" className="text-sm">{pod.duration} · {pod.plays} · {pod.date}</Text>
-                                    </div>
-                                </div>
-                            </Card>
-                        ))}
-                    </>
-                )}
+                        );
+                    }
+                })}
             </div>
         </div>
     );
-}
+};
+
+export default GlobalSearchClient;

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from "react";
-import Image from "next/image";
 import Lightbox, { type Slide } from "yet-another-react-lightbox";   // ← added "type Slide"
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Video from "yet-another-react-lightbox/plugins/video";

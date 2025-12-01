@@ -1,19 +1,23 @@
-import { Metadata } from "next"
-import GlobalSearchClient from "./components/global-search-client"
+import fakeDelay from "@/utils/fakeDelay";
+import GlobalSearchClient from "./components/global-search-client";
 
-export const metadata: Metadata = {
-    title: 'Global Search – Discover & Connect | CRYPTAX',
-    description: 'Discover and connect with crypto and taxation experts from around the world. Access a global community of professionals and resources for your crypto and taxation needs.',
-}
+type SearchParams = {
+    q?: string;
+};
 
-const GlobalSearch = () => {
-
+const GlobalSearch = async ({
+    searchParams,
+}: {
+    searchParams: Promise<SearchParams>;
+}) => {
+    const params = await searchParams;
+    const query = params.q ?? "";
+    console.log(query);
+    await fakeDelay(100);
     // main render
     return (
-        <div>
-            <GlobalSearchClient />
-        </div>
+        <GlobalSearchClient query={query} />
     )
-}
+};
 
-export default GlobalSearch
+export default GlobalSearch;
